@@ -2,14 +2,46 @@
 <html>
 <head>
     <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../../public/css/styles.css">
     <title>OTP</title>
 </head>
 <body>
-    <h2>Enter OTP</h2>
-    <input type="text" id="otp" />
-    <button id="verify">Verify</button>
-    <p id="status"></p>
+    <main class="hero">
+        <header class="brand">
+            <svg class="logo" width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="11" r="1.2" fill="currentColor"/>
+            </svg>
+            <div>
+                <h1>One-Time Passcode</h1>
+                <p class="tagline">Secure, short-lived verification to complement keystroke biometrics</p>
+            </div>
+        </header>
 
+        <section class="card" aria-labelledby="otp-heading">
+            <h2 id="otp-heading">Enter the code</h2>
+            <form id="otp-form">
+                <label for="otp">Verification code</label>
+                <input type="text" id="otp" name="otp" inputmode="numeric" pattern="[0-9]*" required />
+
+                <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+                    <button class="btn primary" id="verify">Verify</button>
+                    <a class="btn ghost" href="Login.html">Back to Login</a>
+                </div>
+
+                <p id="status" aria-live="polite" style="margin-top:10px;color:rgba(230,249,246,0.8)"></p>
+            </form>
+        </section>
+
+        <aside class="card scan" aria-hidden="true">
+            <div class="meta">OTP validity: 2:00 • Protect your code</div>
+        </aside>
+
+        <footer class="foot">© <span id="year"></span> Secure Biometric Lab</footer>
+    </main>
+
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
     <script type="module" src="../js/otp.js"></script>
 </body>
 </html>

@@ -1,0 +1,119 @@
+/* scifi healthcare biometrics theme */
+:root{
+  --bg-1: #041028; /* deep navy */
+  --bg-2: #042b36; /* teal */
+  --accent: #37fff0; /* aqua */
+  --accent-2: #7b61ff; /* violet */
+  --muted: rgba(255,255,255,0.07);
+  --glass: rgba(255,255,255,0.04);
+  --text: #e6f9f6;
+  --card: rgba(255,255,255,0.03);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--text);
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(59,119,255,0.06), transparent), linear-gradient(180deg,var(--bg-1), var(--bg-2) 70%);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:3rem 1rem;
+}
+
+/* subtle grid / tech background */
+.bg-grid{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(0deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+  background-size: 40px 40px, 40px 40px;
+  mix-blend-mode: overlay;
+  opacity:0.6;
+  filter: blur(6px) saturate(120%);
+}
+
+.hero{
+  position:relative;z-index:1;
+  width:min(980px,96%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:14px;
+  padding:32px 36px;
+  box-shadow: 0 10px 30px rgba(3,7,18,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  display:grid;grid-template-columns:1fr;gap:20px;align-items:center;
+}
+
+.brand{display:flex;gap:16px;align-items:center}
+.logo{color:var(--accent);flex:0 0 auto}
+.logo{transition:transform .18s ease, filter .22s ease}
+.logo:hover{transform:scale(1.06);filter:drop-shadow(0 10px 30px rgba(55,255,240,0.06))}
+.brand h1{font-family: 'Orbitron', sans-serif; font-weight:700;margin:0;font-size:1.6rem;letter-spacing:0.6px}
+.brand .tagline{margin:2px 0 0;color:rgba(230,249,246,0.85);font-size:0.95rem}
+
+.cta{display:flex;gap:14px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:10px;text-decoration:none;color:var(--text);font-weight:600;transition:all .18s ease;box-shadow: 0 6px 18px rgba(4,9,22,0.5)}
+.btn:focus{outline:3px solid rgba(55,255,240,0.16);outline-offset:3px}
+
+.btn.primary{
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  color:#001015;
+}
+.btn.primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(59,97,255,0.12)}
+
+.btn.ghost{
+  background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--text)
+}
+.btn.ghost:hover{background:rgba(255,255,255,0.02);transform:translateY(-2px)}
+
+.card.scan{
+  margin-top:6px;position:relative;overflow:hidden;border-radius:12px;padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(119,97,255,0.08);width:260px;
+}
+.card.scan .meta{font-size:0.82rem;color:rgba(230,249,246,0.75)}
+
+/* general card used for forms and content */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);max-width:560px;
+}
+.card h2{margin:0 0 8px 0;font-size:1.05rem}
+
+label{display:block;font-size:0.95rem;color:rgba(230,249,246,0.85);margin-top:8px}
+input[type="text"], input[type="password"], input[type="tel"], input[type="number"]{
+  width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(0,0,0,0.25);color:var(--text);margin-top:6px;font-size:1rem;transition:box-shadow .12s ease,transform .08s ease;
+}
+input::placeholder{color:rgba(230,249,246,0.45)}
+input:focus{box-shadow:0 6px 20px rgba(55,255,240,0.06);border-color:rgba(55,255,240,0.18);transform:translateY(-1px);outline:none}
+.card.scan .meta{transition:opacity .28s ease}
+.card.scan:hover .meta{opacity:0.95}
+.muted{color:rgba(230,249,246,0.6);font-size:0.9rem}
+
+/* scanning bar */
+.scan-line{
+  position:absolute;left:-10%;top:-40%;width:120%;height:160%;transform:rotate(-15deg);background:linear-gradient(90deg, transparent, rgba(55,255,240,0.14), transparent);opacity:0.9;animation:scan 3.6s infinite linear;
+}
+@keyframes scan{to{transform:translateY(140%) rotate(-15deg)}}
+
+.foot{font-size:0.85rem;color:rgba(230,249,246,0.6);margin-top:4px}
+
+/* Responsive */
+@media (min-width:760px){
+  .hero{grid-template-columns:1fr auto;align-items:center;padding:40px}
+  .cta{flex-direction:column;justify-self:end}
+}
+
+@media (max-width:420px){
+  .brand h1{font-size:1.25rem}
+  .btn{padding:10px 14px}
+  .card.scan{width:100%}
+}
+
+/* small accent shimmer for hero */
+.hero::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(400px 120px at 75% 20%, rgba(123,97,255,0.06), transparent);
+}
+
+/* make the focus states accessible */
+a:focus{outline:2px dashed rgba(55,255,240,0.12);outline-offset:4px}

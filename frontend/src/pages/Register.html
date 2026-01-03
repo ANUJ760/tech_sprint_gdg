@@ -2,14 +2,46 @@
 <html>
 <head>
     <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../../public/css/styles.css">
     <title>Register</title>
 </head>
 <body>
-    <h2>Register</h2>
-    <input type="password" id="password" />
-    <button id="submit">Submit Attempt</button>
-    <p id="status"></p>
+    <main class="hero">
+        <header class="brand">
+            <svg class="logo" width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="11" r="1.2" fill="currentColor"/>
+            </svg>
+            <div>
+                <h1>Register — Keystroke ID</h1>
+                <p class="tagline">Create a biometric profile with secure keystroke capture</p>
+            </div>
+        </header>
 
+        <section class="card" aria-labelledby="register-heading">
+            <h2 id="register-heading">Create Account</h2>
+            <form id="register-form">
+                <label for="password">Choose a passphrase</label>
+                <input type="password" id="password" name="password" required autocomplete="new-password" />
+
+                <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+                    <button class="btn primary" id="submit">Start Registration</button>
+                    <button type="button" class="btn ghost" id="cancel" onclick="history.back()">Cancel</button>
+                </div>
+
+                <p id="status" aria-live="polite" style="margin-top:10px;color:rgba(230,249,246,0.8)"></p>
+            </form>
+        </section>
+
+        <aside class="card scan" aria-hidden="true">
+            <div class="meta">Calibration in progress • Keep typing</div>
+        </aside>
+
+        <footer class="foot">© <span id="year"></span> Secure Biometric Lab</footer>
+    </main>
+
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
     <script type="module" src="../js/register.js"></script>
 </body>
 </html>

@@ -2,14 +2,46 @@
 <html>
 <head>
     <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../../public/css/styles.css">
     <title>Login</title>
 </head>
 <body>
-    <h2>Login</h2>
-    <input type="password" id="password" />
-    <button id="login">Login</button>
-    <p id="status"></p>
+    <main class="hero">
+        <header class="brand">
+            <svg class="logo" width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="11" r="1.2" fill="currentColor"/>
+            </svg>
+            <div>
+                <h1>Login — Keystroke ID</h1>
+                <p class="tagline">Authenticate continuously with biometric keystroke signals</p>
+            </div>
+        </header>
 
+        <section class="card" aria-labelledby="login-heading">
+            <h2 id="login-heading">Sign in</h2>
+            <form id="login-form">
+                <label for="password">Enter your passphrase</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password" />
+
+                <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+                    <button class="btn primary" id="login">Login</button>
+                    <a class="btn ghost" href="OTP.html">Use OTP</a>
+                </div>
+
+                <p id="status" aria-live="polite" style="margin-top:10px;color:rgba(230,249,246,0.8)"></p>
+            </form>
+        </section>
+
+        <aside class="card scan" aria-hidden="true">
+            <div class="meta">Live verification active • Typing data in use</div>
+        </aside>
+
+        <footer class="foot">© <span id="year"></span> Secure Biometric Lab</footer>
+    </main>
+
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
     <script type="module" src="../js/login.js"></script>
 </body>
 </html>
