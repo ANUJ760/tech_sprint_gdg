@@ -22,10 +22,9 @@ button.addEventListener("click", async () => {
 
     const data = await res.json()
 
-    if (data.next === "OTP") {
-        window.location.href = "OTP.html"
-    } else if (data.next === "SUCCESS") {
+    if (data.next === "SUCCESS") {
         status.innerText = "Login successful"
+        window.location.href = "../../public/index.html"
     } else {
         status.innerText = "Retry login"
     }

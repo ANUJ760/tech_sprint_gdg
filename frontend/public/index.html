@@ -1,44 +1,364 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Keystroke Auth — Biometric Access</title>
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare+ | Secure Healthcare Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/landing.css">
 </head>
 <body>
-    <div class="bg-grid" aria-hidden="true"></div>
+    <header class="topbar">
+        <div class="container">
+            <div class="topbar-inner">
+                <div class="brand">
+                    <div class="brand-badge" aria-hidden="true"><i class="fas fa-heartbeat"></i></div>
+                    <div class="brand-name">
+                        <strong>MediCare+</strong>
+                        <span>Trusted Digital Health</span>
+                    </div>
+                </div>
 
-    <main class="hero" role="main">
-        <header class="brand">
-            <!-- Simple biometric icon -->
-            <svg class="logo" width="72" height="72" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M12 2C9.243 2 7 4.243 7 7v1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12 22c2.757 0 5-2.243 5-5v-1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M5.5 7.5c.8 1.7 1.5 3.1 2.9 4.5 2 2 5.1 2 7.1 0 1.4-1.4 2.1-2.8 2.9-4.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="12" cy="11" r="1.2" fill="currentColor"/>
-            </svg>
-            <div>
-                <h1>Keystroke ID</h1>
-                <p class="tagline">Scifi healthcare biometrics — continuous authentication at keystroke speed</p>
+                <div class="security-pill" aria-label="Security status">
+                    <i class="fas fa-shield-halved" aria-hidden="true"></i>
+                    <span>Biometrically Secured Healthcare Portal</span>
+                </div>
+
+                <div class="nav-actions">
+                    <a class="btn btn-ghost" href="../src/pages/Login.html"><i class="fas fa-right-to-bracket" aria-hidden="true"></i>Login</a>
+                    <a class="btn btn-primary" href="../src/pages/Register.html"><i class="fas fa-user-plus" aria-hidden="true"></i>Create Account</a>
+                </div>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <section class="cta">
-            <a class="btn primary" href="../src/pages/Register.html">Register</a>
-            <a class="btn ghost" href="../src/pages/Login.html">Login</a>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-card">
+                        <div class="hero-main">
+                            <div class="kicker">
+                                <i class="fas fa-fingerprint" aria-hidden="true"></i>
+                                <span>Behavioral biometrics powered access</span>
+                            </div>
+                            <h1 class="hero-title">Your health records, protected by <span class="emph">keystroke biometrics</span>.</h1>
+                            <p class="hero-sub">A secure and professional portal for appointments, prescriptions, lab reports, and billing — with encryption and access logging by default.</p>
+                            <div class="hero-actions">
+                                <a class="btn btn-primary" href="../src/pages/Register.html"><i class="fas fa-shield" aria-hidden="true"></i>Register Securely</a>
+                                <a class="btn btn-ghost" href="../src/pages/Login.html"><i class="fas fa-key" aria-hidden="true"></i>Sign In</a>
+                            </div>
+
+                            <div class="stats" aria-label="Platform highlights">
+                                <div class="stat">
+                                    <strong>End-to-End</strong>
+                                    <span>Encrypted records</span>
+                                </div>
+                                <div class="stat">
+                                    <strong>Access</strong>
+                                    <span>Logged & monitored</span>
+                                </div>
+                                <div class="stat">
+                                    <strong>Zero</strong>
+                                    <span>Raw keystroke storage</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-side">
+                            <div class="side-block" aria-label="Patient overview preview">
+                                <div class="side-title">
+                                    <h3>Patient Overview</h3>
+                                    <div class="status"><i class="fas fa-check-circle" aria-hidden="true"></i>Verified via Keystroke Biometrics</div>
+                                </div>
+
+                                <div class="patient">
+                                    <div class="avatar" aria-hidden="true">JD</div>
+                                    <div class="meta">
+                                        <strong>John Doe</strong>
+                                        <span>Patient ID: MED123456</span>
+                                    </div>
+                                    <span class="badge ok"><i class="fas fa-circle-check" aria-hidden="true"></i>Keystroke Verified</span>
+                                </div>
+
+                                <div class="note">
+                                    <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                                    <span>Access protected using behavioral biometrics. Sessions are monitored and audited.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <aside class="card scan" aria-hidden="true">
-            <div class="scan-line"/>
-            <div class="meta">Device: BioPulse 2.1 • Secure</div>
-        </aside>
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Medical services built for clarity</h2>
+                        <p>Everything a patient expects — designed like a modern hospital system.</p>
+                    </div>
+                </div>
 
-        <footer class="foot">© <span id="year"></span> Secure Biometric Lab</footer>
+                <div class="grid-3">
+                    <div class="card card-pad">
+                        <div class="feature">
+                            <div class="ico" aria-hidden="true"><i class="fas fa-user-doctor"></i></div>
+                            <div>
+                                <strong>Verified Doctors</strong>
+                                <span>Official profiles with specialty, availability, and consultation mode.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <div class="feature">
+                            <div class="ico" aria-hidden="true"><i class="fas fa-file-prescription"></i></div>
+                            <div>
+                                <strong>Prescription Records</strong>
+                                <span>Read-only, prescription-style layout with digital signing watermark.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <div class="feature">
+                            <div class="ico" aria-hidden="true"><i class="fas fa-file-medical"></i></div>
+                            <div>
+                                <strong>Reports & Downloads</strong>
+                                <span>Lab reports, imaging, and summaries — encrypted & access logged.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Doctors</h2>
+                        <p>Official cards with specialty and availability.</p>
+                    </div>
+                </div>
+
+                <div class="doctors">
+                    <div class="card card-pad">
+                        <div class="doctor">
+                            <div class="doc-avatar" aria-hidden="true">SJ</div>
+                            <div class="doc-meta">
+                                <strong>Dr. Sarah Johnson</strong>
+                                <span>Cardiology • Online</span>
+                            </div>
+                            <span class="badge ok"><i class="fas fa-circle" aria-hidden="true"></i>Available</span>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <div class="doctor">
+                            <div class="doc-avatar" aria-hidden="true">AM</div>
+                            <div class="doc-meta">
+                                <strong>Dr. Anil Mehta</strong>
+                                <span>General Physician • In-person</span>
+                            </div>
+                            <span class="badge wait"><i class="fas fa-clock" aria-hidden="true"></i>Next: 2:00 PM</span>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <div class="doctor">
+                            <div class="doc-avatar" aria-hidden="true">RK</div>
+                            <div class="doc-meta">
+                                <strong>Dr. Riya Kapoor</strong>
+                                <span>Radiology • Reports</span>
+                            </div>
+                            <span class="badge off"><i class="fas fa-moon" aria-hidden="true"></i>Offline</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Prescription Preview</h2>
+                        <p>Designed like an official hospital prescription (read-only).</p>
+                    </div>
+                </div>
+
+                <div class="card prescription">
+                    <div class="head">
+                        <div>
+                            <strong>Prescribing Doctor: Dr. Sarah Johnson</strong>
+                            <span>Date: 15 Nov 2023</span>
+                        </div>
+                        <div class="rx-watermark">Digitally Signed & Secure</div>
+                    </div>
+                    <div class="rx-body">
+                        <ol class="rx-list">
+                            <li class="rx-item">
+                                <div><strong>Metformin 500mg</strong></div>
+                                <div><span>Dosage: 1 tablet</span></div>
+                                <div><span>Duration: 30 days</span></div>
+                            </li>
+                            <li class="rx-item">
+                                <div><strong>Atorvastatin 10mg</strong></div>
+                                <div><span>Dosage: 1 tablet</span></div>
+                                <div><span>Duration: 60 days</span></div>
+                            </li>
+                            <li class="rx-item">
+                                <div><strong>Vitamin D3</strong></div>
+                                <div><span>Dosage: Weekly</span></div>
+                                <div><span>Duration: 8 weeks</span></div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Appointment History</h2>
+                        <p>Clean, minimal, readable status layout.</p>
+                    </div>
+                </div>
+
+                <table class="table" aria-label="Appointment history preview">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Doctor</th>
+                            <th>Purpose</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>15 Nov 2023</td>
+                            <td>Dr. Sarah Johnson</td>
+                            <td>Routine Checkup</td>
+                            <td><span class="badge ok"><i class="fas fa-check" aria-hidden="true"></i>Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>02 Dec 2023</td>
+                            <td>Dr. Anil Mehta</td>
+                            <td>Fever & Cold</td>
+                            <td><span class="badge wait"><i class="fas fa-calendar" aria-hidden="true"></i>Upcoming</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Medical Records & Reports</h2>
+                        <p>Encrypted, audited downloads (UI preview).</p>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card card-pad">
+                        <div class="feature">
+                            <div class="ico" aria-hidden="true"><i class="fas fa-vial"></i></div>
+                            <div>
+                                <strong>Blood Test Report</strong>
+                                <span>Type: Lab Report • Date: 10 Nov 2023</span>
+                            </div>
+                            <span class="badge"><i class="fas fa-download" aria-hidden="true"></i>Download</span>
+                        </div>
+                    </div>
+                    <div class="card card-pad">
+                        <div class="feature">
+                            <div class="ico" aria-hidden="true"><i class="fas fa-x-ray"></i></div>
+                            <div>
+                                <strong>Chest X-Ray</strong>
+                                <span>Type: Imaging • Date: 05 Nov 2023</span>
+                            </div>
+                            <span class="badge"><i class="fas fa-download" aria-hidden="true"></i>Download</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Billing & Receipts</h2>
+                        <p>Official invoice-style summary (UI preview).</p>
+                    </div>
+                </div>
+
+                <div class="card card-pad">
+                    <dl class="dl">
+                        <div>
+                            <dt>Receipt ID</dt>
+                            <dd>RCPT-2023-00421</dd>
+                        </div>
+                        <div>
+                            <dt>Date</dt>
+                            <dd>15 Nov 2023</dd>
+                        </div>
+                        <div>
+                            <dt>Services</dt>
+                            <dd>Consultation + Lab Tests</dd>
+                        </div>
+                        <div>
+                            <dt>Payment Status</dt>
+                            <dd>Pending</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="card card-pad trust">
+                    <h3><i class="fas fa-shield" aria-hidden="true"></i> Security Trust Panel</h3>
+                    <ul class="trust-list">
+                        <li><i class="fas fa-fingerprint" aria-hidden="true"></i><span>Keystroke Biometric Authentication</span></li>
+                        <li><i class="fas fa-lock" aria-hidden="true"></i><span>End-to-End Encryption</span></li>
+                        <li><i class="fas fa-ban" aria-hidden="true"></i><span>Zero Raw Keystroke Storage</span></li>
+                        <li><i class="fas fa-history" aria-hidden="true"></i><span>Access Logging Enabled</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="brand footer-brand">
+                        <div class="brand-badge" aria-hidden="true"><i class="fas fa-heartbeat"></i></div>
+                        <div class="brand-name">
+                            <strong>MediCare+</strong>
+                            <span>Secure Patient Portal</span>
+                        </div>
+                    </div>
+                    <div>For demo UI purposes only. Not medical advice.</div>
+                </div>
+                <div>
+                    <div class="footer-links-title">Quick Links</div>
+                    <div><a href="../src/pages/Register.html">Register</a></div>
+                    <div><a href="../src/pages/Login.html">Login</a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
