@@ -1,47 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../../public/css/styles.css">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare+ | Secure Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/login.css">
 </head>
 <body>
-    <main class="hero">
-        <header class="brand">
-            <svg class="logo" width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="12" cy="11" r="1.2" fill="currentColor"/>
-            </svg>
-            <div>
-                <h1>Login — Keystroke ID</h1>
-                <p class="tagline">Authenticate continuously with biometric keystroke signals</p>
-            </div>
-        </header>
-
-        <section class="card" aria-labelledby="login-heading">
-            <h2 id="login-heading">Sign in</h2>
-            <form id="login-form">
-                <label for="password">Enter your passphrase</label>
-                <input type="password" id="password" name="password" required autocomplete="current-password" />
-
-                <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
-                    <button class="btn primary" id="login">Login</button>
-                    <a class="btn ghost" href="OTP.html">Use OTP</a>
+    <div class="auth-container">
+        <section class="auth-illustration" aria-label="Security information">
+            <div class="illustration-card">
+                <div class="brand">
+                    <div class="brand-badge" aria-hidden="true"><i class="fas fa-heartbeat"></i></div>
+                    <div class="brand-name">
+                        <strong>MediCare+</strong>
+                        <span>Secure Patient Portal</span>
+                    </div>
                 </div>
 
-                <p id="status" aria-live="polite" style="margin-top:10px;color:rgba(230,249,246,0.8)"></p>
-            </form>
+                <h2 class="illus-title">Biometrically secured access to your medical account</h2>
+                <p class="illus-sub">Your session uses keystroke dynamics to strengthen authentication without storing raw keystrokes.</p>
+
+                <div class="badges" aria-label="Security features">
+                    <div class="badge"><i class="fas fa-fingerprint" aria-hidden="true"></i>Keystroke Biometrics</div>
+                    <div class="badge"><i class="fas fa-lock" aria-hidden="true"></i>End-to-End Encryption</div>
+                    <div class="badge"><i class="fas fa-history" aria-hidden="true"></i>Access Logging</div>
+                </div>
+
+                <div class="preview" aria-label="Preview modules">
+                    <div class="preview-row">
+                        <strong>Appointments</strong>
+                        <span>Clean scheduling view</span>
+                    </div>
+                    <div class="preview-row">
+                        <strong>Prescriptions</strong>
+                        <span>Digitally signed records</span>
+                    </div>
+                    <div class="preview-row">
+                        <strong>Reports</strong>
+                        <span>Encrypted downloads</span>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <aside class="card scan" aria-hidden="true">
-            <div class="meta">Live verification active • Typing data in use</div>
-        </aside>
+        <main class="auth-form-container" aria-label="Login form">
+            <div class="form-card">
+                <div class="form-head">
+                    <h1>Sign in</h1>
+                    <p>Verify your identity using your password and typing pattern.</p>
+                </div>
 
-        <footer class="foot">© <span id="year"></span> Secure Biometric Lab</footer>
-    </main>
+                <form class="form">
+                    <div class="form-group">
+                        <div class="helper">
+                            <div class="pill" id="biometricPill">
+                                <i class="fas fa-shield" aria-hidden="true"></i>
+                                <span>Focus password to start</span>
+                            </div>
+                            <a href="../../public/index.html">Back to Home</a>
+                        </div>
+                    </div>
 
-    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+                    <div class="form-group">
+                        <label class="label" for="password">Password</label>
+                        <input class="input" type="password" id="password" placeholder="••••••••" autocomplete="current-password" />
+                    </div>
+
+                    <button class="btn btn-primary" id="login" type="button" disabled>
+                        <i class="fas fa-right-to-bracket" aria-hidden="true"></i>
+                        Login Securely
+                    </button>
+
+                    <div class="status" id="status"></div>
+
+                    <div class="footer">
+                        <div>New here? <a href="Register.html">Create an account</a></div>
+                        <div>Protected by encryption and access logging.</div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
     <script type="module" src="../js/login.js"></script>
+    <script src="../js/login-ui.js"></script>
 </body>
 </html>

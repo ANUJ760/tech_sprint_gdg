@@ -1,47 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../../public/css/styles.css">
-    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Portal - Biometric Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/register.css">
 </head>
 <body>
-    <main class="hero">
-        <header class="brand">
-            <svg class="logo" width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="12" cy="11" r="1.2" fill="currentColor"/>
-            </svg>
-            <div>
-                <h1>Register — Keystroke ID</h1>
-                <p class="tagline">Create a biometric profile with secure keystroke capture</p>
-            </div>
-        </header>
-
-        <section class="card" aria-labelledby="register-heading">
-            <h2 id="register-heading">Create Account</h2>
-            <form id="register-form">
-                <label for="password">Choose a passphrase</label>
-                <input type="password" id="password" name="password" required autocomplete="new-password" />
-
-                <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
-                    <button class="btn primary" id="submit">Start Registration</button>
-                    <button type="button" class="btn ghost" id="cancel" onclick="history.back()">Cancel</button>
+    <div class="auth-container">
+        <div class="auth-illustration">
+            <div class="auth-illustration-content">
+                <div class="icon">
+                    <i class="fas fa-heartbeat"></i>
                 </div>
-
-                <p id="status" aria-live="polite" style="margin-top:10px;color:rgba(230,249,246,0.8)"></p>
+                <h1>Secure Healthcare Portal</h1>
+                <p>Your health data is protected with advanced biometric security, ensuring only you have access to your medical information.</p>
+                
+                <div class="security-badges">
+                    <div class="security-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        End-to-End Encryption
+                    </div>
+                    <div class="security-badge">
+                        <i class="fas fa-fingerprint"></i>
+                        Biometric Authentication
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="auth-form-container">
+            <div class="auth-header">
+                <h2>Create Your Account</h2>
+                <p>Register to access your secure healthcare portal</p>
+            </div>
+            
+            <form id="registrationForm" class="auth-form">
+                <div class="form-group">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" id="fullName" class="form-control" placeholder="John Doe" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="you@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <div class="flex justify-between items-center">
+                        <label for="password" class="form-label">Create a Password</label>
+                    </div>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                    <div class="password-strength">
+                        <div class="strength-meter"></div>
+                    </div>
+                    <div class="strength-text">Password strength: <span id="strengthText">Weak</span></div>
+                </div>
+                
+                <div class="biometric-feedback" id="biometricFeedback">
+                    <div class="biometric-indicator" id="typingPattern">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                        <span>Analyzing typing pattern...</span>
+                    </div>
+                    <div class="biometric-indicator" id="keystrokeDynamics">
+                        <i class="far fa-circle"></i>
+                        <span>Keystroke dynamics not yet captured</span>
+                    </div>
+                    <div class="biometric-indicator" id="typingRhythm">
+                        <i class="far fa-circle"></i>
+                        <span>Typing rhythm not yet established</span>
+                    </div>
+                </div>
+                
+                <div class="form-group" style="margin-top: 2rem;">
+                    <button type="submit" id="submit" class="btn btn-primary" disabled>
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    Already have an account? <a href="./Login.html">Sign in</a>
+                </div>
             </form>
-        </section>
+            
+            <div class="security-panel" style="margin-top: 2rem;">
+                <h4><i class="fas fa-shield-alt"></i> Security Information</h4>
+                <div class="security-features">
+                    <div class="security-feature">
+                        <i class="fas fa-fingerprint"></i>
+                        <span>Keystroke Biometric Authentication</span>
+                    </div>
+                    <div class="security-feature">
+                        <i class="fas fa-lock"></i>
+                        <span>End-to-End Encryption</span>
+                    </div>
+                    <div class="security-feature">
+                        <i class="fas fa-ban"></i>
+                        <span>Zero Raw Keystroke Storage</span>
+                    </div>
+                    <div class="security-feature">
+                        <i class="fas fa-history"></i>
+                        <span>Access Logging Enabled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <aside class="card scan" aria-hidden="true">
-            <div class="meta">Calibration in progress • Keep typing</div>
-        </aside>
-
-        <footer class="foot">© <span id="year"></span> Secure Biometric Lab</footer>
-    </main>
-
-    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    <!-- JavaScript Files -->
     <script type="module" src="../js/register.js"></script>
+    <script src="../js/register-ui.js"></script>
 </body>
 </html>
