@@ -1,0 +1,16 @@
+{
+  "name": "tech-sprint-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Frontend for Keystroke Auth project",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve -s public"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^12.7.0"
+  }
+}
