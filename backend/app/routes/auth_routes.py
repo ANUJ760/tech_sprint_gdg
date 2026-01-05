@@ -1,60 +1,37 @@
 from fastapi import APIRouter, Header, HTTPException
-from models.schemas import RegisterRequest, LoginRequest
-from services.firebase_service import verify_token
-from services.ml_service import (
-    register_user_profile,
-    evaluate_login_risk
-)
+from app.core.firebase_auth import verify_token
+from app.services.biometric_service import register_biometrics, verify_biometrics
+
 
 router = APIRouter(prefix="/api")
 
 @router.post("/register")
-def register(
-    payload: RegisterRequest,
-    authorization: str = Header(...)
-):
+def register(data: dict, authorization: str | None = Header(default=None)):
+    if authorization is None:
+        raise HTTPException(status_code=401, detail="Authorization header missing")
+
     token = authorization.replace("Bearer ", "")
-    try:
-        user_id = verify_token(token)
-    except Exception:
-        raise HTTPException(status_code=401, detail="Invalid or missing token")
+    user_id = verify_token(token)
 
-    if len(payload.attempts) < 5:
-        raise HTTPException(status_code=400, detail="Not enough samples")
+    attempts = data.get("attempts")
+    if not attempts:
+        raise HTTPException(status_code=400, detail="Missing attempts")
 
-    register_user_profile(
-        user_id,
-        payload.attempts,
-        payload.device_type
-    )
-
-    return {"status": "REGISTERED"}
+    register_biometrics(user_id, attempts)
+    return {"status": "PROFILE_CREATED"}
 
 
 @router.post("/login")
-def login(
-    payload: LoginRequest,
-    authorization: str = Header(...)
-):
+def login(data: dict, authorization: str | None = Header(default=None)):
+    if authorization is None:
+        raise HTTPException(status_code=401, detail="Authorization header missing")
+
     token = authorization.replace("Bearer ", "")
-    try:
-        user_id = verify_token(token)
-    except Exception:
-        raise HTTPException(status_code=401, detail="Invalid or missing token")
+    user_id = verify_token(token)
 
-    risk = evaluate_login_risk(
-        user_id,
-        payload.features,
-        payload.device_type
-    )
+    attempt = data.get("attempt")
+    if not attempt:
+        raise HTTPException(status_code=400, detail="Missing attempt")
 
-    if risk == "LOW":
-        return {"status": "SUCCESS"}
+    return verify_biometrics(user_id, attempt)
 
-    if risk == "MEDIUM":
-        return {"status": "RETRY"}
-
-    if risk == "HIGH":
-        return {"status": "DENIED"}
-
-    raise HTTPException(status_code=500, detail="Invalid risk response")

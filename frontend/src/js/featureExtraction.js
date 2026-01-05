@@ -1,4 +1,4 @@
-export function extractFeatures(events) {
+export function extractTimingData(events) {
     const downs = []
     const ups = []
 
@@ -8,8 +8,8 @@ export function extractFeatures(events) {
     })
 
     const hold = []
-    const pp = []
-    const rp = []
+    const pressPress = []
+    const releasePress = []
 
     for (let i = 0; i < downs.length; i++) {
         const up = ups.find(u => u.key === downs[i].key && u.time >= downs[i].time)
@@ -17,10 +17,14 @@ export function extractFeatures(events) {
     }
 
     for (let i = 0; i < downs.length - 1; i++) {
-        pp.push(downs[i + 1].time - downs[i].time)
+        pressPress.push(downs[i + 1].time - downs[i].time)
         const up = ups.find(u => u.key === downs[i].key)
-        if (up) rp.push(downs[i + 1].time - up.time)
+        if (up) releasePress.push(downs[i + 1].time - up.time)
     }
 
-    return [...hold, ...pp, ...rp]
+    return {
+        hold_time: hold,
+        press_press: pressPress,
+        release_press: releasePress
+    }
 }

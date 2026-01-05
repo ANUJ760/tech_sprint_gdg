@@ -1,60 +1,41 @@
 class KeystrokeCapture {
-    constructor(inputElement) {
-        this.inputElement = inputElement
-        this.keyDownTimes = new Map()
+    constructor(input) {
+        this.input = input
         this.events = []
-        this.active = false
-        this.handleKeyDown = this.handleKeyDown.bind(this)
-        this.handleKeyUp = this.handleKeyUp.bind(this)
+        this.downMap = new Map()
+        this.onDown = this.onDown.bind(this)
+        this.onUp = this.onUp.bind(this)
     }
 
     start() {
-        this.reset()
-        this.active = true
-        this.inputElement.addEventListener("keydown", this.handleKeyDown)
-        this.inputElement.addEventListener("keyup", this.handleKeyUp)
+        this.events = []
+        this.downMap.clear()
+        this.input.addEventListener("keydown", this.onDown)
+        this.input.addEventListener("keyup", this.onUp)
     }
 
     stop() {
-        this.active = false
-        this.inputElement.removeEventListener("keydown", this.handleKeyDown)
-        this.inputElement.removeEventListener("keyup", this.handleKeyUp)
+        this.input.removeEventListener("keydown", this.onDown)
+        this.input.removeEventListener("keyup", this.onUp)
     }
 
-    reset() {
-        this.keyDownTimes.clear()
-        this.events = []
-    }
-
-    handleKeyDown(e) {
-        if (!this.active) return
+    onDown(e) {
         if (e.repeat) return
-        if (this.isIgnoredKey(e.key)) return
-
-        const time = performance.now()
-        this.keyDownTimes.set(e.key, time)
-
-        this.events.push({ key: e.key, type: "down", time })
+        if (["Shift","Control","Alt","CapsLock","Tab","Meta"].includes(e.key)) return
+        const t = performance.now()
+        this.downMap.set(e.key, t)
+        this.events.push({ key: e.key, type: "down", time: t })
     }
 
-    handleKeyUp(e) {
-        if (!this.active) return
-        if (this.isIgnoredKey(e.key)) return
-
-        const time = performance.now()
-        const downTime = this.keyDownTimes.get(e.key)
-        if (downTime === undefined) return
-
-        this.events.push({ key: e.key, type: "up", time })
-        this.keyDownTimes.delete(e.key)
+    onUp(e) {
+        if (!this.downMap.has(e.key)) return
+        const t = performance.now()
+        this.events.push({ key: e.key, type: "up", time: t })
+        this.downMap.delete(e.key)
     }
 
-    isIgnoredKey(key) {
-        return ["Shift","Control","Alt","CapsLock","Tab","Meta"].includes(key)
-    }
-
-    getRawEvents() {
-        return [...this.events]
+    getEvents() {
+        return this.events
     }
 }
 

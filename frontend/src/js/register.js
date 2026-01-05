@@ -1,60 +1,110 @@
+let authPasswordValue = null
+let referencePassword = null
+
+
+import { auth } from "./firebaseConfig.js"
+import { createUserWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"
+
 import KeystrokeCapture from "./keystrokeCapture.js"
-import { extractFeatures } from "./featureExtraction.js"
-import { getAuth, signInAnonymously } from "firebase/auth"
-import { app } from "./firebaseConfig.js"
+import { extractTimingData } from "./featureExtraction.js"
 
-const auth = getAuth(app)
 
-const input = document.getElementById("password")
-const button = document.getElementById("submit")
+const email = document.getElementById("email")
+const authPassword = document.getElementById("authPassword")
+const signupBtn = document.getElementById("signup")
+
+const password = document.getElementById("password")
+const button = document.getElementById("capture")
 const status = document.getElementById("status")
 
-const capture = new KeystrokeCapture(input)
-let attempts = []
 
-input.addEventListener("focus", () => capture.start())
+signupBtn.onclick = async () => {
+    try {
+        await createUserWithEmailAndPassword(
+            auth,
+            email.value,
+            authPassword.value
+        )
 
-async function ensureAuth() {
-    if (!auth.currentUser) {
-        await signInAnonymously(auth)
+        authPasswordValue = authPassword.value
+
+        status.innerText = "User created. Now type the SAME password 10 times."
+    } catch (e) {
+        status.innerText = e.code + ": " + e.message
     }
-    return auth.currentUser
 }
 
-button.addEventListener("click", async () => {
+
+
+const capture = new KeystrokeCapture(password)
+let attempts = []
+
+password.addEventListener("focus", () => capture.start())
+
+button.onclick = async () => {
     capture.stop()
-    const raw = capture.getRawEvents()
-    const features = extractFeatures(raw)
 
-    if (features.length === 0) return
+    const typedPassword = password.value
 
-    attempts.push(features)
-    status.innerText = `Captured ${attempts.length}/10 attempts`
 
-    input.value = ""
-    capture.reset()
-    capture.start()
+    if (typedPassword !== authPasswordValue) {
+        status.innerText = "Password must match account password exactly"
+        password.value = ""
+        capture.start()
+        return
+}
 
-    if (attempts.length === 10) {
-        try {
-            const user = await ensureAuth()
-            const token = await user.getIdToken()
 
-            const res = await fetch("/api/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                body: JSON.stringify({ attempts })
-            })
-
-            if (!res.ok) {
-                const err = await res.json().catch(() => ({}))
-                status.innerText = `Registration failed: ${err.detail || res.statusText}`
-            } else {
-                status.innerText = "Registration data sent"
-                attempts = []
-            }
-        } catch (err) {
-            status.innerText = `Registration failed: ${err.message}`
+    // First attempt sets reference password
+    if (referencePassword === null) {
+        referencePassword = typedPassword
+        status.innerText = "Password set. Repeat the same password 9 more times."
+    } else {
+        // Validate password consistency
+        if (typedPassword !== referencePassword) {
+            status.innerText = "Password mismatch. Please type the SAME password."
+            password.value = ""
+            capture.start()
+            return
         }
     }
-})
+
+    const events = capture.getEvents()
+    if (events.length < 2) {
+        status.innerText = "Typing too short. Try again."
+        capture.start()
+        return
+    }
+
+    const timingData = extractTimingData(events)
+    attempts.push(timingData)
+
+    status.innerText = `Captured ${attempts.length} / 10`
+    password.value = ""
+
+    if (attempts.length === 10) {
+        if (!auth.currentUser) {
+            status.innerText = "Please login first"
+            return
+        }
+
+        const token = await auth.currentUser.getIdToken()
+
+        await fetch("http://localhost:8000/api/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ attempts })
+        })
+
+        status.innerText = "Keystroke profile created"
+        attempts = []
+        referencePassword = null
+    } else {
+        capture.start()
+    }
+}
+

@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes.auth_routes import router
+from app.routes.auth_routes import router
 
-app = FastAPI(title="Keystroke Auth Backend")
+
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
