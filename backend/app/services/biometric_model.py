@@ -41,7 +41,7 @@ class HybridBiometricProfile:
 
     def verify(self, attempt):
         coarse_x = reduce_features(attempt)
-        coarse_score = self.coarse.score(coarse_x) + 20
+        coarse_score = self.coarse.score(coarse_x) + 35
 
         if coarse_score < 60:
             return {
@@ -50,7 +50,7 @@ class HybridBiometricProfile:
                 "fine_score": None
             }
 
-        fine_score = self.fine.score(np.array(attempt)) + 20
+        fine_score = self.fine.score(np.array(attempt)) + 35
         self.history.append(fine_score)
 
         penalty = np.std(self.history) * 0.5
