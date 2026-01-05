@@ -22,9 +22,9 @@ export function extractTimingData(events) {
         if (up) releasePress.push(downs[i + 1].time - up.time)
     }
 
-    return {
-        hold_time: hold,
-        press_press: pressPress,
-        release_press: releasePress
-    }
+    return [
+        ...hold,
+        ...pressPress,
+        ...releasePress
+    ]
 }
