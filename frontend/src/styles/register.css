@@ -290,6 +290,12 @@
   margin-right: 0.5rem;
   color: white;
   opacity: 0.8;
+} 
+
+.security-badge i {
+  margin-right: 0.5rem;
+  color: white;
+  opacity: 0.8;
 }
 
 /* Security Panel */

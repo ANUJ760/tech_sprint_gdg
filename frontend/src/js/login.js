@@ -1,34 +1,66 @@
-import KeystrokeCapture from "./keystrokeCapture.js"
-import { extractFeatures } from "./featureExtraction.js"
+import { auth } from "./firebaseConfig.js"
+import { signInWithEmailAndPassword }
+from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"
 
-const input = document.getElementById("password")
-const button = document.getElementById("login")
+import KeystrokeCapture from "./keystrokeCapture.js"
+import { extractTimingData } from "./featureExtraction.js"
+
+const emailInput = document.getElementById("email")
+const passwordInput = document.getElementById("password")
+const loginBtn = document.getElementById("login")
 const status = document.getElementById("status")
 
-const capture = new KeystrokeCapture(input)
+const capture = new KeystrokeCapture(passwordInput)
 
-input.addEventListener("focus", () => capture.start())
+passwordInput.addEventListener("focus", () => {
+  capture.start()
+})
 
-button.addEventListener("click", async () => {
-    capture.stop()
-    const raw = capture.getRawEvents()
-    const features = extractFeatures(raw)
+loginBtn.onclick = async () => {
+  capture.stop()
 
-    const res = await fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ features })
+  try {
+    // 1️⃣ Firebase authentication
+    const userCred = await signInWithEmailAndPassword(
+      auth,
+      emailInput.value,
+      passwordInput.value
+    )
+
+    const token = await userCred.user.getIdToken()
+
+    // 2️⃣ Keystroke feature extraction
+    const events = capture.getEvents()
+    if (events.length < 2) {
+      status.innerText = "Type password naturally"
+      return
+    }
+
+    const attempt = extractTimingData(events)
+
+    // 3️⃣ Backend biometric verification
+    const res = await fetch("http://localhost:8000/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({ attempt })
     })
 
     const data = await res.json()
 
-    if (data.next === "SUCCESS") {
-        status.innerText = "Login successful"
-        window.location.href = "../../public/index.html"
+    if (data.decision === "ACCEPT") {
+      status.innerText = "Login successful"
+      window.location.href = "../../public/index.html"
     } else {
-        status.innerText = "Retry login"
+      status.innerText = "Biometric verification failed"
     }
 
-    input.value = ""
-    capture.reset()
-})
+  } catch (e) {
+    status.innerText = e.code || e.message
+  }
+
+  passwordInput.value = ""
+  capture.reset()
+}
