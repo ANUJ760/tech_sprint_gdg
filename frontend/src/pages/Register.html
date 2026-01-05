@@ -1,26 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MediCare+ | Register</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../styles/register.css" />
+</head>
 <body>
 
-<h2>Register</h2>
+  <header class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge" aria-hidden="true"><i class="fas fa-heartbeat"></i></div>
+          <div class="brand-name">
+            <strong>MediCare+</strong>
+            <span>Trusted Digital Health</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-<input id="email" placeholder="Email">
-<input id="authPassword" type="password" placeholder="Account Password">
-<button id="signup">Create Account</button>
-<p>
-  Already have an account?
-  <a href="Login.html">Login here</a>
-</p>
+  <main class="auth-main">
+    <section class="auth-container">
+      <!-- Registration Card -->
+      <div class="auth-card">
+        <h1>Create Account</h1>
+        <p class="auth-subtitle">Securely register your account and enable keystroke biometrics</p>
 
+        <input id="email" type="email" placeholder="Email">
+        <input id="authPassword" type="password" placeholder="Account Password">
 
-<hr>
+        <button id="signup"><i class="fas fa-user-plus"></i> Create Account</button>
 
-<h3>Keystroke Registration</h3>
-<input id="password" type="password" placeholder="Type password">
-<button id="capture">Capture</button>
+        <p class="auth-footer">
+          Already have an account? <a href="Login.html">Login here</a>
+        </p>
 
-<p id="status"></p>
+        <hr class="divider">
 
-<script type="module" src="../js/register.js"></script>
+        <h3>Keystroke Registration</h3>
+        <input id="password" type="password" placeholder="Type password for capture">
+        <button id="capture"><i class="fas fa-fingerprint"></i> Capture</button>
+
+        <p id="status"></p>
+      </div>
+
+      <!-- Illustration -->
+      <div class="auth-illustration">
+        <i class="fas fa-fingerprint"></i>
+        <p>Capture your behavioral biometrics securely</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand footer-brand">
+            <div class="brand-badge" aria-hidden="true"><i class="fas fa-heartbeat"></i></div>
+            <div class="brand-name">
+              <strong>MediCare+</strong>
+              <span>Secure Patient Portal</span>
+            </div>
+          </div>
+          <div>Trusted Medical Assistance</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/register.js"></script>
 </body>
 </html>
