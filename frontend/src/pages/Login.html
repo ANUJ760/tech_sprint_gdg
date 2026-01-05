@@ -2,37 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Secure Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MediCare+ | Secure Login</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles/login.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../styles/login.css" />
 </head>
 <body>
 
-  <div class="auth-container">
-    <h1>Sign in</h1>
+  <header class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge" aria-hidden="true"><i class="fas fa-heartbeat"></i></div>
+          <div class="brand-name">
+            <strong>MediCare+</strong>
+            <span>Trusted Digital Health</span>
+          </div>
+        </div>
+        <div class="security-pill" aria-label="Security status">
+          <i class="fas fa-shield-halved" aria-hidden="true"></i>
+          <span>Biometrically Secured Healthcare Portal</span>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <input id="email" type="email" placeholder="Email" />
-    <input id="password" type="password" placeholder="Password" />
+  <main class="auth-main">
+    <section class="auth-container">
+      <div class="auth-card">
+        <h1>Sign in</h1>
+        <p class="auth-subtitle">Access your medical records securely using keystroke biometrics</p>
 
-    <button id="login" disabled>Login Securely</button>
+        <input id="email" type="email" placeholder="Email" />
+        <input id="password" type="password" placeholder="Password" />
 
-    <div id="status"></div>
+        <button id="login" disabled><i class="fas fa-key"></i> Login Securely</button>
 
-    <p>
-      New user?
-      <a href="Register.html">Create account</a>
-    </p>
-  </div>
+        <div id="status"></div>
 
-  <!-- LOGIC FIRST -->
+        <p class="auth-footer">
+          New user? <a href="Register.html">Create an account</a>
+        </p>
+      </div>
+
+      <div class="auth-illustration">
+        <i class="fas fa-fingerprint"></i>
+        <p>Behavioral biometrics powered secure access</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand footer-brand">
+            <div class="brand-badge" aria-hidden="true"><i class="fas fa-heartbeat"></i></div>
+            <div class="brand-name">
+              <strong>MediCare+</strong>
+              <span>Secure Patient Portal</span>
+            </div>
+          </div>
+          <div>Trusted Medical Assistance</div>
+        </div>
+        <!-- <div>
+          <div class="footer-links-title">Quick Links</div>
+          <div><a href="Register.html">Register</a></div>
+          <div><a href="Login.html">Login</a></div>
+        </div> -->
+      </div>
+    </div>
+  </footer>
+
+  
   <script type="module" src="../js/login.js"></script>
-
-  <!-- UI SECOND (no module) -->
+ 
   <script src="../js/login-ui.js"></script>
-
 </body>
 </html>

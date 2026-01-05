@@ -1,13 +1,18 @@
-from app.services.model_store import save_profile, get_profile
+from app.services.biometric_model import HybridBiometricProfile
+from app.services.firestore_service import save_profile, load_profile
 
+def register_biometrics(user_id: str, attempts: list):
+    profile = HybridBiometricProfile()
+    profile.train(attempts)
 
-def register_biometrics(user_id, attempts):
-    if len(attempts) != 10:
-        raise ValueError("Exactly 10 attempts required")
-    save_profile(user_id, attempts)
+    save_profile(user_id, profile.to_dict())
 
-def verify_biometrics(user_id, attempt):
-    profile = get_profile(user_id)
-    if not profile:
-        raise ValueError("Biometric profile not found")
+def verify_biometrics(user_id: str, attempt: list):
+    data = load_profile(user_id)
+    if not data:
+        return {"decision": "REJECT", "reason": "No biometric profile"}
+
+    profile = HybridBiometricProfile()
+    profile.from_dict(data)
+
     return profile.verify(attempt)
