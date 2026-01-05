@@ -50,7 +50,7 @@ class HybridBiometricProfile:
                 "fine_score": None
             }
 
-        fine_score = self.fine.score(np.array(attempt)) + 35
+        fine_score = self.fine.score(np.array(attempt)) + 50
         self.history.append(fine_score)
 
         penalty = np.std(self.history) * 0.5
