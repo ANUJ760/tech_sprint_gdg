@@ -46,7 +46,7 @@ a:hover{text-decoration:underline}
   border-radius:var(--radius);
   box-shadow:var(--shadow);
   padding:26px;
-}
+} 
 
 .brand{
   display:flex;
